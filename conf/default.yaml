@@ -1,0 +1,50 @@
+seeds:
+  use_seeds: True
+  id: 42
+data:
+  train_dir: ./data/test
+  test_dir: ./data/data_test
+  val_dir: ./data/data_val
+  data_rate: 1.0
+  train_rate: 0.8
+  test_rate: 0.1
+  valid_rate: 0.1
+  imu_freq: 100
+  sample_freq: 20
+augment:
+  feat_acc_sigma: 0.0001
+  feat_gyr_sigma: 0.00001
+  add_bias_noise: True
+  accel_bias_range: 0.1
+  gyro_bias_range: 0.002
+  add_gravity_noise: True
+  gravity_noise_theta_range: 5 #degree
+model:
+  model_name: IMU_LSTM_Net
+  model_yaml: './conf/model.yaml'
+  pred_velocity: True
+translate:
+  Q_cam_imu: [1, 0, 0, 0] # w, x, y , z
+  t_cam_imu: [0, 0, 0] # x, y, z
+train:
+  out_dir: ./output/
+  use_pretrain_model: False
+  batch_size: 32
+  epochs: 201
+  n_workers: 4
+  seq_len: 10 
+  optimizer:
+    learning_rate: 0.0001
+    method: Adam
+    weight_decay: 0.0
+  scheduler:
+    factor: 0.05 # default 0.1
+    patience: 10 # default 10
+val:
+  batch_size: 1024
+test:
+  out_dir: ./output/test # default ./output/test
+  batch_size: 1024 # default 1024
+schemes:
+  train: True # training
+  test: True   # testing

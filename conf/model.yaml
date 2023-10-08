@@ -1,0 +1,5 @@
+model_param:
+  past_time: 0 # default 0
+  window_time: 1.0 # default 1
+  future_time: 1.0 # default 0
+  stride: 20
